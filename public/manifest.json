@@ -1,0 +1,10 @@
+{
+  "name": "ChurchConnect",
+  "short_name": "ChurchConnect",
+  "description": "Find a drummer, keyboardist, or sound engineer for Sunday — fast.",
+  "start_url": "/app",
+  "display": "standalone",
+  "background_color": "#efe7d6",
+  "theme_color": "#efe7d6",
+  "icons": []
+}

@@ -1,26 +1,190 @@
 @import "tailwindcss";
 
+/*
+  ChurchConnect — "warm marketplace" design language.
+  White cards floating on warm cream, soft shadows, rounded corners,
+  real photography. Terracotta primary; status colors are calm tinted
+  pills that still map to real backend enum values.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #fbf6ee;
+  --surface: #ffffff;
+  --surface-sunken: #f4ede2;
+  --ink: #2a2320;
+  --ink-soft: #6f6157;
+  --ink-faint: #9a8b7e;
+  --line: #ece2d4;
+
+  --clay: #bc5a3c;
+  --clay-hover: #a94d31;
+  --clay-ink: #ffffff;
+  --clay-tint: #f6e6dd;
+
+  --emergency: #a8243c;
+  --emergency-tint: #f7dfe2;
+  --scheduled: #2e6ca4;
+  --scheduled-tint: #dceaf4;
+  --verified: #2f6b4f;
+  --verified-tint: #dcebe0;
+  --gold: #b8862f;
+  --gold-tint: #f4e8cf;
+
+  --focus-ring: #bc5a3c;
+  --shadow-sm: 0 1px 2px rgba(42, 35, 32, 0.06);
+  --shadow-card: 0 1px 3px rgba(42, 35, 32, 0.05), 0 10px 30px -16px rgba(42, 35, 32, 0.18);
+  --shadow-lift: 0 2px 6px rgba(42, 35, 32, 0.08), 0 18px 40px -20px rgba(42, 35, 32, 0.28);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root[data-theme="dark"] {
+  --paper: #1c1814;
+  --surface: #272019;
+  --surface-sunken: #201a15;
+  --ink: #f4ebde;
+  --ink-soft: #c3b3a2;
+  --ink-faint: #90806f;
+  --line: #3a3129;
+
+  --clay: #db7351;
+  --clay-hover: #e5825f;
+  --clay-ink: #1c1814;
+  --clay-tint: #3a2820;
+
+  --emergency: #e77186;
+  --emergency-tint: #3d2229;
+  --scheduled: #7fb0e0;
+  --scheduled-tint: #22303d;
+  --verified: #74c091;
+  --verified-tint: #223027;
+  --gold: #dcae5c;
+  --gold-tint: #352c1c;
+
+  --focus-ring: #db7351;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 12px 30px -16px rgba(0, 0, 0, 0.6);
+  --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.4), 0 20px 44px -20px rgba(0, 0, 0, 0.7);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --paper: #1c1814;
+    --surface: #272019;
+    --surface-sunken: #201a15;
+    --ink: #f4ebde;
+    --ink-soft: #c3b3a2;
+    --ink-faint: #90806f;
+    --line: #3a3129;
+
+    --clay: #db7351;
+    --clay-hover: #e5825f;
+    --clay-ink: #1c1814;
+    --clay-tint: #3a2820;
+
+    --emergency: #e77186;
+    --emergency-tint: #3d2229;
+    --scheduled: #7fb0e0;
+    --scheduled-tint: #22303d;
+    --verified: #74c091;
+    --verified-tint: #223027;
+    --gold: #dcae5c;
+    --gold-tint: #352c1c;
+
+    --focus-ring: #db7351;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 12px 30px -16px rgba(0, 0, 0, 0.6);
+    --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.4), 0 20px 44px -20px rgba(0, 0, 0, 0.7);
   }
 }
 
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+
+  --color-clay: var(--clay);
+  --color-clay-hover: var(--clay-hover);
+  --color-clay-ink: var(--clay-ink);
+  --color-clay-tint: var(--clay-tint);
+
+  --color-emergency: var(--emergency);
+  --color-emergency-tint: var(--emergency-tint);
+  --color-scheduled: var(--scheduled);
+  --color-scheduled-tint: var(--scheduled-tint);
+  --color-verified: var(--verified);
+  --color-verified-tint: var(--verified-tint);
+  --color-gold: var(--gold);
+  --color-gold-tint: var(--gold-tint);
+
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-jakarta);
+  --font-data: var(--font-plex-mono);
+
+  --radius-sm: 0.5rem;
+  --radius: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+
+  --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
+}
+
+html {
+  color-scheme: light dark;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display), Georgia, serif;
+  text-wrap: balance;
+  letter-spacing: -0.015em;
+}
+
+.font-data {
+  font-family: var(--font-data), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.eyebrow {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.card-lift {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
 }
