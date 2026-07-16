@@ -8,14 +8,17 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const session = await getSession();
   if (!session) redirect("/login");
 
-  const homeHref = session.role === "PROVIDER" ? "/app/provider" : "/app/church";
+  const homeHref =
+    session.role === "PROVIDER" ? "/app/provider" : session.role === "PLATFORM_ADMIN" ? "/app/admin" : "/app/church";
   const navLinks =
     session.role === "PROVIDER"
       ? [
           { href: "/app/provider", label: "Feed" },
           { href: "/app/provider/profile", label: "My profile" },
         ]
-      : [{ href: "/app/church", label: "My churches" }];
+      : session.role === "PLATFORM_ADMIN"
+        ? [{ href: "/app/admin", label: "Admin" }]
+        : [{ href: "/app/church", label: "My churches" }];
 
   return (
     <div className="flex min-h-full flex-col">

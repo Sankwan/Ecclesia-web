@@ -112,6 +112,125 @@ export interface Booking {
   provider: { id: string; displayName: string; fullName: string; phone: string };
 }
 
+export interface VerificationRecord {
+  id: string;
+  providerId: string;
+  level: VerificationLevel;
+  evidence: Record<string, unknown>;
+  reviewedBy: string | null;
+  approvedAt: string | null;
+  notes: string | null;
+  createdAt: string;
+  provider: {
+    id: string;
+    displayName: string;
+    areaLabel: string;
+    verification: VerificationLevel;
+    user: { phone: string; fullName: string };
+  };
+}
+
+export interface AdminChurch {
+  id: string;
+  name: string;
+  areaLabel: string;
+  phone: string;
+  isVerified: boolean;
+  smsBalance: number;
+  createdAt: string;
+  _count: { members: number; requests: number; bookings: number };
+  admin: { id: string; fullName: string; phone: string; isActive: boolean } | null;
+  lastRequestAt: string | null;
+}
+
+export interface AdminNotification {
+  id: string;
+  title: string;
+  body: string;
+  data: Record<string, unknown>;
+  readAt: string | null;
+  createdAt: string;
+}
+
+export interface UserContact {
+  id: string;
+  fullName: string;
+  phone: string;
+  isActive: boolean;
+}
+
+export interface AdminProvider {
+  id: string;
+  displayName: string;
+  areaLabel: string;
+  verification: VerificationLevel;
+  availability: AvailabilityStatus;
+  baseRateGhs: number | null;
+  completedCount: number;
+  cancelledCount: number;
+  noShowCount: number;
+  rating: number | null;
+  ratingCount: number;
+  createdAt: string;
+  user: UserContact;
+  skills: { slug: string; name: string }[];
+}
+
+export interface AdminBooking {
+  id: string;
+  status: BookingStatus;
+  agreedGhs: number;
+  serviceDate: string;
+  startTime: string;
+  skill: string;
+  cancelReason: string | null;
+  createdAt: string;
+  church: { id: string; name: string; phone: string };
+  provider: { displayName: string; fullName: string; phone: string };
+}
+
+interface WorklistRequest {
+  id: string;
+  skill: string;
+  areaLabel: string;
+  serviceDate: string;
+  startTime: string;
+  urgency?: Urgency;
+  church: { name: string; phone: string };
+}
+
+export interface Worklist {
+  pendingVerifications: number;
+  supplyGaps: WorklistRequest[];
+  atRisk: WorklistRequest[];
+  disputes: {
+    id: string;
+    status: BookingStatus;
+    skill: string;
+    serviceDate: string;
+    church: { name: string; phone: string };
+    provider: { displayName: string; fullName: string; phone: string };
+  }[];
+  recentCancellations: {
+    id: string;
+    skill: string;
+    serviceDate: string;
+    cancelReason: string | null;
+    churchName: string;
+    provider: { displayName: string; fullName: string; phone: string };
+  }[];
+  topupRequests: { id: string; body: string; data: Record<string, unknown> }[];
+}
+
+export interface Metrics {
+  requests: { total: number; booked: number };
+  fillRate: number | null;
+  medianTimeToFillEmergencyMins: number | null;
+  showUpRate: number | null;
+  rebookingRate30d: number | null;
+  rebookingBase: { eligible: number; rebooked: number };
+}
+
 export interface ChurchMember {
   id: string;
   churchId: string;

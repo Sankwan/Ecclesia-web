@@ -3,5 +3,7 @@ import { getSession } from "@/lib/session";
 
 export default async function AppHome() {
   const session = await getSession();
-  redirect(session?.role === "PROVIDER" ? "/app/provider" : "/app/church");
+  if (session?.role === "PROVIDER") redirect("/app/provider");
+  if (session?.role === "PLATFORM_ADMIN") redirect("/app/admin");
+  redirect("/app/church");
 }
