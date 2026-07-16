@@ -15,7 +15,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           { href: "/app/provider", label: "Feed" },
           { href: "/app/provider/profile", label: "My profile" },
         ]
-      : [{ href: "/app/church", label: "Requests" }];
+      : [{ href: "/app/church", label: "My churches" }];
 
   return (
     <div className="flex min-h-full flex-col">

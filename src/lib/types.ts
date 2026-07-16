@@ -32,6 +32,8 @@ export interface Church {
   phone: string;
   isVerified: boolean;
   smsBalance: number;
+  smsSenderId?: string | null;
+  birthdaySettings?: BirthdaySettings;
   roleInChurch?: string;
   _count?: { members: number; requests: number; bookings: number };
 }
@@ -108,6 +110,43 @@ export interface Booking {
     contactPhone?: string;
   };
   provider: { id: string; displayName: string; fullName: string; phone: string };
+}
+
+export interface ChurchMember {
+  id: string;
+  churchId: string;
+  fullName: string;
+  phone: string | null;
+  gender: string | null;
+  birthday: string | null;
+  group: string | null;
+  smsConsent: boolean;
+}
+
+export interface BirthdaySettings {
+  enabled: boolean;
+  template: string;
+  sendHour?: number;
+}
+
+export interface SmsMessageStatus {
+  id: string;
+  toPhone: string;
+  status: "QUEUED" | "SENT" | "DELIVERED" | "FAILED";
+  provider: string | null;
+  creditsUsed: number;
+  sentAt: string | null;
+  deliveredAt: string | null;
+  failReason: string | null;
+}
+
+export interface Campaign {
+  id: string;
+  kind: string;
+  template: string;
+  scheduled: string | null;
+  createdAt: string;
+  messages: SmsMessageStatus[];
 }
 
 export interface ProviderProfile {
